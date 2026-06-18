@@ -1,0 +1,15 @@
+{
+    "name": "siraj/composer-practice",
+    "description": "Learning Composer and Laravel",
+    "autoload": {
+        "psr-4": {
+            "Siraj\\ComposerPractice\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Siraj Hasand"
+        }
+    ],
+    "require": {}
+}
