@@ -9,16 +9,22 @@
         Welcome to Our {{ $page }} Page
     </h1>
     <div>
-        <form action="">
+        <form action="/save" method="POST" class="mb-6">
+            @csrf
             <label for="note" class="block text-gray-700 font-bold mb-2">Note:</label>
             <input type="text" id="note" name="note" class="border border-gray-300 
             w-lg
             rounded py-2
              px-4 focus:outline-none 
             focus:ring-2 focus:ring-blue-500">
+            
             <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">
                 Submit
             </button>
+            @error('note')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+
+            @enderror
         </form>
     </div>
     <div class="mt-8 w-lg overflow-x-auto shadow-md rounded-lg ">
@@ -31,10 +37,11 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($notes as $note)
                 
                     <tr>
-                        <td class=" px-4 py-2">1</td>
-                        <td class=" px-4 py-2">Sample Note</td>
+                        <td class=" px-4 py-2">{{ $note->id }}</td>
+                        <td class=" px-4 py-2">{{ $note->note }}</td>
                         <td class=" px-4 py-2">
                             <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
                                 Edit
@@ -44,6 +51,7 @@
                             </button>
                         </td>
                     </tr>
+                    @endforeach
                 
             </tbody>
         </table>
