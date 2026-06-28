@@ -31,5 +31,26 @@ class HomeController extends Controller
         ]);
         return redirect()->back()->with('success','Note saved successfully!');
     }
+    function edit($id){
+        $page = 'Edit Note';
+        $note = Note::findOrFail($id);
+        return view('edit')
+        ->with('page',$page)
+        ->with('note',$note);
+    }
+    function update(Request $request,$id){
+        $request->validate([
+            'note' => 'required|string|max:255'
+        ]);
+        $note = Note::findOrFail($id);
+        $note->note = $request->note;
+        $note->save();
+        return redirect('/')->with('success','Note updated successfully!');     
+    }
+    function delete($id){
+        $note = Note::findOrFail($id);
+        $note->delete();
+        return redirect('/')->with('success','Note deleted successfully!');
+    }
 }
     
