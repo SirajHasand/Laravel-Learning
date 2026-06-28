@@ -33,22 +33,24 @@ class HomeController extends Controller
     }
     function edit($id){
         $page = 'Edit Note';
-        $note = Note::findOrFail($id);
-        return view('edit')
+        $note = Note::find($id);
+        return view('home')
         ->with('page',$page)
+        ->with('notes',Note::all())
         ->with('note',$note);
+
     }
     function update(Request $request,$id){
         $request->validate([
             'note' => 'required|string|max:255'
         ]);
-        $note = Note::findOrFail($id);
+        $note = Note::find($id);
         $note->note = $request->note;
         $note->save();
         return redirect('/')->with('success','Note updated successfully!');     
     }
     function delete($id){
-        $note = Note::findOrFail($id);
+        $note = Note::find($id);
         $note->delete();
         return redirect('/')->with('success','Note deleted successfully!');
     }

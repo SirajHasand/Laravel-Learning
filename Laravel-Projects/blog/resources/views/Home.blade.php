@@ -9,10 +9,13 @@
         Welcome to Our {{ $page }} Page
     </h1>
     <div>
-        <form action="/save" method="POST" class="mb-6">
+        <form @if(isset($note)) action="{{ route('update', ['id' => $note->id]) }}" @else action="/save" @endif method="POST" class="mb-6">
             @csrf
+            @if(isset($note))
+                @method("PUT")
+            @endif
             <label for="note" class="block text-gray-700 font-bold mb-2">Note:</label>
-            <input type="text" id="note" name="note" class="border border-gray-300 
+            <input type="text" id="note" name="note" @if(isset($note)) value="{{ old('note', $note->note) }}" @else value="{{ old('note') }}" @endif class="border border-gray-300 
             w-lg
             rounded py-2
              px-4 focus:outline-none 
@@ -37,18 +40,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($notes as $note)
+                @foreach( $notes as $note)
                 
                     <tr>
                         <td class=" px-4 py-2">{{ $note->id }}</td>
                         <td class=" px-4 py-2">{{ $note->note }}</td>
                         <td class=" px-4 py-2">
-                            <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                            <a href="/edit/{{ $note->id }}" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
                                 Edit
-                            </button>
-                            <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
-                                Delete
-                            </button>
+                            </a>
+                            <form action="/delete/{{ $note->id }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                                    Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
