@@ -10,5 +10,6 @@ Route::post('/save',[HomeController::class,'save']);
 Route::get('/edit/{id}',[HomeController::class,'edit'])->name('edit');
 Route::put('/update/{id}',[HomeController::class,'update'])->name('update');
 Route::delete('/delete/{id}',[HomeController::class,'delete'])->name('delete');
-Route::get('/about',[AboutController::class,'index']);
 Route::get('/contact',[ContactController::class,'index']);
+
+Route::resource('about', AboutController::class);
