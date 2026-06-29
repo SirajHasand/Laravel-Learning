@@ -28,6 +28,9 @@
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
 
             @enderror
+            @if(session('success'))
+                <p class="text-green-500 text-sm mt-1">{{ session('success') }}</p>
+            @endif
         </form>
     </div>
     <div class="mt-8 w-lg overflow-x-auto shadow-md rounded-lg ">
