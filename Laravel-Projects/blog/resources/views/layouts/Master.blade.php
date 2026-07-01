@@ -15,9 +15,7 @@
             <div class="flex items-center justify-between h-16">
 
                 <!-- Logo -->
-                <a href="/" class="text-2xl font-bold">
-                    My Blog
-                </a>
+                <a href="/" class="text-2xl font-bold">My Blog</a>
 
                 <!-- Navigation -->
                 <nav>
@@ -27,16 +25,18 @@
                                 Home
                             </a>
                         </li>
-                        <li>
-                            <a href="/about" class="hover:text-gray-200 transition">
-                                About
+                        <li> 
+                            <a href="{{route('post')}}" class="hover:text-gray-200 transition" >
+                                Post
                             </a>
                         </li>
                         <li>
-                            <a href="/contact" class="hover:text-gray-200 transition">
-                                Contact
+                            <a href="#" class="hover:text-gray-200 transition" >
+                                
+                                Admin
                             </a>
                         </li>
+                        
                     </ul>
                 </nav>
 
@@ -45,9 +45,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8">
-        @yield('content')
-    </main>
+    <main class="container mx-auto px-6 py-8">@yield('content') </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-4 mt-10">
